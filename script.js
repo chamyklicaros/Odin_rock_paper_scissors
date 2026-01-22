@@ -1,5 +1,5 @@
 
-let rps = ["rock",'paper','scissors']
+
 
 
 function getComputerChoice(rps){
@@ -47,32 +47,66 @@ function playRound(hChoice,cChoice){
 
 }
 
-function playGame(winner){
+function playGame(){
+    let rps = ["rock",'paper','scissors']
         
     let humanScore = 0;
     let computerScore = 0;
-    let gameWinner = ''
 
-    if (winner == "Human"){
-        humanScore ++;
+    const maxRound = 5;
+    let currentRound = 0;
+
+    let computerChoice;
+    let playerChoice;
+
+
+    let choiceWinner = playRound(playerChoice,computerChoice)
+
+    let gameWinner = ''
+ 
+    while( currentRound != maxRound){
+        currentRound ++
+        computerChoice = getComputerChoice(rps);
+        playerChoice = getHumanChoice();
+
+
+        choiceWinner = playRound(playerChoice,computerChoice)
+
+        
+        if (choiceWinner == "Human"){
+            humanScore ++;
+        }
+        else{
+            computerScore ++;
+        }
+
+        console.log("The player choice is: " + playerChoice)
+        console.log("The computer choice is: " + computerChoice)
+        console.log("The winner for round " + currentRound + " is the " + choiceWinner)
+
+
+    }
+
+    if (humanScore == computerScore ){
+            gameWinner = "it's a draw"
+    }
+    else if (humanScore > computerScore){
+            gameWinner = "The Human Wins"
     }
     else{
-        computerScore ++;
+             gameWinner ="The Computer Wins"
     }
+
+    console.log(gameWinner)
+        
+
 
 
 
 
 }
 
-const maxRound = 5;
-let currentRound = 0;
 
-let computerChoice = getComputerChoice(rps);
-let playerChoice = getHumanChoice();
 
-let winner = playRound(playerChoice,computerChoice)
 
-playGame(winner)
-
-console.log(winner)
+playGame()
