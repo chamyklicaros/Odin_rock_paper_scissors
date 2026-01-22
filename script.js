@@ -11,7 +11,7 @@ function getComputerChoice(rps){
     return rps[ranNum]
 }
 
-function getHumanChoice(rps){
+function getHumanChoice(){
     let choice = prompt("Choose from the following: Rock, Paper, Scissors").toLowerCase();
 
 
@@ -21,36 +21,46 @@ function getHumanChoice(rps){
 
 function playRound(hChoice,cChoice){
 
-    let winner = "";
+    let winner = ""
+    let text =  "";
 
     if (hChoice === cChoice) {
-        winner = "It's a Draw";
+        text = "It's a Draw";
+        winner = "Draw"
+        
     }
     else if (
         (hChoice === "rock" && cChoice === "scissors") ||
         (hChoice === "paper" && cChoice === "rock") ||
         (hChoice === "scissors" && cChoice === "paper")
     ) {
-        winner = "The Human wins";
+        text= "The Human wins";
+        winner = "Human"
     }
     else {
-        winner = "The Computer wins";
+        text = "The Computer wins";
+        winner = "Computer"
     }
 
 
 
-    return winner
+    return [text,winner]
 
 }
 
-let humanScore = 0;
-let computerScore = 0;
+function playGame(){
+        
+    let humanScore = 0;
+    let computerScore = 0;
+
+
+}
 
 
 let computerChoice = getComputerChoice(rps);
-let playerChoice = getHumanChoice(rps);
+let playerChoice = getHumanChoice();
 
-let winner = playRound(playerChoice,computerChoice)
+let [text,winner] = playRound(playerChoice,computerChoice)
 console.log(computerChoice)
 console.log(playerChoice)
-console.log(winner)
+console.log(text)
