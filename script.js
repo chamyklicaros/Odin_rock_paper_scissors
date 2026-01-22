@@ -22,10 +22,9 @@ function getHumanChoice(){
 function playRound(hChoice,cChoice){
 
     let winner = ""
-    let text =  "";
+
 
     if (hChoice === cChoice) {
-        text = "It's a Draw";
         winner = "Draw"
         
     }
@@ -34,33 +33,46 @@ function playRound(hChoice,cChoice){
         (hChoice === "paper" && cChoice === "rock") ||
         (hChoice === "scissors" && cChoice === "paper")
     ) {
-        text= "The Human wins";
+  
         winner = "Human"
     }
     else {
-        text = "The Computer wins";
+  
         winner = "Computer"
     }
 
 
 
-    return [text,winner]
+    return winner
 
 }
 
-function playGame(){
+function playGame(winner){
         
     let humanScore = 0;
     let computerScore = 0;
+    let gameWinner = ''
+
+    if (winner == "Human"){
+        humanScore ++;
+    }
+    else{
+        computerScore ++;
+    }
+
+
 
 
 }
 
+const maxRound = 5;
+let currentRound = 0;
 
 let computerChoice = getComputerChoice(rps);
 let playerChoice = getHumanChoice();
 
-let [text,winner] = playRound(playerChoice,computerChoice)
-console.log(computerChoice)
-console.log(playerChoice)
-console.log(text)
+let winner = playRound(playerChoice,computerChoice)
+
+playGame(winner)
+
+console.log(winner)
