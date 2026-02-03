@@ -97,16 +97,15 @@ function playGame(){
         
    
         
-        if (currentRound === maxRound) {
-            let gameWinner = '';
+        if (currentRound == maxRound ) {
             if (humanScore === computerScore){
-                gameWinner = "It's a draw!";
+                alert("It's a draw!");
             }
             else if (humanScore > computerScore){
-                gameWinner = "The Human Wins!";
+               alert("The Human Wins!");
             }
             else{
-                gameWinner = "The Computer Wins!";
+               alert("The Computer Wins!");
             }
             
         }
