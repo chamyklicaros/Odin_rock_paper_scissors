@@ -66,6 +66,9 @@ function playGame(){
     let computerScoreTxt = document.getElementById("computerScoreID");
 
     let winnerTxt = document.getElementById("winnerRoundID");
+
+    let humanIMG = document.getElementById("humanImgID");
+    let  computerIMG = document.getElementById("computerImgID")
     
     getHumanChoice((choice) => {
  
@@ -112,11 +115,40 @@ function playGame(){
         humanScoreTxt.textContent = `Score: ${humanScore}`;
         computerScoreTxt.textContent = `Score: ${computerScore}`;
 
-        winnerTxt.textContent = `${choiceWinner}`;
+        winnerTxt.textContent = `Winner: ${choiceWinner}`;
+
+
+        switch (playerChoice){
+            case "rock":
+                humanIMG.src = "img/rock.png"
+                break
+            case "paper":
+                humanIMG.src = "img/paper.png"
+                break
+            case "scissors":
+                humanIMG.src = "img/scissors.png"
+                break
+                
+        }
+        
+        switch (computerChoice){
+            case "rock":
+                computerIMG.src = "img/rock.png"
+                break
+            case "paper":
+                computerIMG.src = "img/paper.png"
+                break
+            case "scissors":
+                computerIMG.src = "img/scissors.png"
+                break
+                
+        }
 
 
     });
 }
+
+
 
 
 
