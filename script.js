@@ -1,8 +1,6 @@
 
-
-
-
-function getComputerChoice(rps){
+function getComputerChoice(){
+    let rps = ["rock",'paper','scissors']
 
     let maxChoices = 3
     let ranNum = Math.floor(Math.random() * maxChoices)
@@ -11,13 +9,18 @@ function getComputerChoice(rps){
     return rps[ranNum]
 }
 
-function getHumanChoice(){
-    let choice = prompt("Choose from the following: Rock, Paper, Scissors").toLowerCase();
+function getHumanChoice(callback) {
+    const btn = document.querySelectorAll('button');
 
+    btn.forEach((button) => {
+        button.addEventListener('click',(e) => {
+            let choiceID = e.target.id;
+            callback(choiceID);
+        })
 
-    return choice
-    
+    })
 }
+
 
 function playRound(hChoice,cChoice){
 
@@ -47,65 +50,73 @@ function playRound(hChoice,cChoice){
 
 }
 
-function playGame(){
-    let rps = ["rock",'paper','scissors']
-        
-    let humanScore = 0;
-    let computerScore = 0;
-
-    const maxRound = 5;
-    let currentRound = 0;
-
-    let computerChoice;
-    let playerChoice;
-
-
-    let choiceWinner = playRound(playerChoice,computerChoice)
-
-    let gameWinner = ''
- 
-    while( currentRound != maxRound){
-        currentRound ++
-        computerChoice = getComputerChoice(rps);
-        playerChoice = getHumanChoice();
-
-
-        choiceWinner = playRound(playerChoice,computerChoice)
-
-        
-        if (choiceWinner == "Human"){
-            humanScore ++;
-        }
-        else{
-            computerScore ++;
-        }
-
-        console.log("The player choice is: " + playerChoice)
-        console.log("The computer choice is: " + computerChoice)
-        console.log("The winner for round " + currentRound + " is the " + choiceWinner)
-
-
-    }
-
-    if (humanScore == computerScore ){
-            gameWinner = "it's a draw"
-    }
-    else if (humanScore > computerScore){
-            gameWinner = "The Human Wins"
-    }
-    else{
-             gameWinner ="The Computer Wins"
-    }
-
-    console.log(gameWinner)
-        
-
-
-
-
+function resetGame(){
 
 }
 
+
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
+    const maxRound = 5;
+    let currentRound = 0;
+
+    let roundTxt =  document.getElementById("round");
+    let humanScoreTxt = document.getElementById("humanScoreID");
+    let computerScoreTxt = document.getElementById("computerScoreID");
+
+    let winnerTxt = document.getElementById("winnerRoundID");
+    
+    getHumanChoice((choice) => {
+ 
+        if (currentRound >= maxRound) {
+          
+            return;
+        }
+        
+        currentRound++;
+       
+
+        
+        let playerChoice = choice;
+        let computerChoice = getComputerChoice(); 
+        let choiceWinner = playRound(playerChoice, computerChoice);
+        
+        console.log(`Player: ${playerChoice}, Computer: ${computerChoice}`);
+        console.log(`Round Winner: ${choiceWinner}`);
+        
+        if (choiceWinner === "Human"){
+            humanScore++;
+        }
+        else if (choiceWinner === "Computer"){
+            computerScore++;
+        }
+        
+   
+        
+        if (currentRound === maxRound) {
+            let gameWinner = '';
+            if (humanScore === computerScore){
+                gameWinner = "It's a draw!";
+            }
+            else if (humanScore > computerScore){
+                gameWinner = "The Human Wins!";
+            }
+            else{
+                gameWinner = "The Computer Wins!";
+            }
+            
+        }
+        //Update the html
+        roundTxt.textContent = `Current Round: ${currentRound}`;
+        humanScoreTxt.textContent = `Score: ${humanScore}`;
+        computerScoreTxt.textContent = `Score: ${computerScore}`;
+
+        winnerTxt.textContent = `${choiceWinner}`;
+
+
+    });
+}
 
 
 
